@@ -1,0 +1,10 @@
+services:
+  credit-card-default-api:
+    build: .
+    image: credit-card-default-api
+    container_name: credit-card-default-api
+    ports:
+      - "5001:5001"
+    environment:
+      FLASK_HOST: 0.0.0.0
+      PORT: 5001
