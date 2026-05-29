@@ -13,6 +13,10 @@ data/
 outputs/
 models/
 
+# Модель добавлена в репо по требованию ТЗ
+!models/
+!models/logistic_regression_model.joblib
+
 # System
 .DS_Store
 

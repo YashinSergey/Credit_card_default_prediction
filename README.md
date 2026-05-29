@@ -158,6 +158,52 @@ curl -X POST http://127.0.0.1:5001/predict \
 
 `prediction = 1` означает прогноз дефолта, `prediction = 0` означает отсутствие дефолта
 
+## Артефакты
+
+- обученная модель: [models/logistic_regression_model.joblib](models/logistic_regression_model.joblib)
+- зависимости: [requirements.txt](requirements.txt)
+- Dockerfile: [Dockerfile](Dockerfile)
+- Docker Compose: [docker-compose.yml](docker-compose.yml)
+- план A/B-теста: [ab_test_plan.md](ab_test_plan.md)
+- Docker-образ: `mrblue126/credit-card-default-api:latest`
+
+Обычно обученные модели не хранят в Git, а кладут в отдельное хранилище артефактов. В этом проекте файл модели добавлен в репозиторий, потому что в формате сдачи он указан как обязательный артефакт.
+
+## Пример проверки API
+
+Проверка работоспособности:
+
+```bash
+curl http://127.0.0.1:5001/health
+```
+
+Ответ:
+
+```json
+{
+  "status": "healthy"
+}
+```
+
+Проверка предсказания:
+
+```bash
+curl -X POST http://127.0.0.1:5001/predict \
+  -H "Content-Type: application/json" \
+  -d @examples/predict_request.json
+```
+
+Ответ:
+
+```json
+{
+  "model_version": "logistic_regression_v1",
+  "prediction": 1,
+  "probability": 0.6648003850015387,
+  "threshold": 0.42
+}
+```
+
 ## Архитектура и мониторинг
 
 Архитектурные решения, концепция брокера сообщений, логирование, DVC/MLflow и бизнес-метрики описаны в [ARCHITECTURE.md](ARCHITECTURE.md).
