@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask, jsonify, request
 
 try:
@@ -29,4 +31,7 @@ def predict():
 
 
 if __name__ == "__main__":
-    app.run(host="127.0.0.1", port=5001, debug=False)
+    host = os.getenv("FLASK_HOST", "127.0.0.1")
+    port = int(os.getenv("PORT", "5001"))
+
+    app.run(host=host, port=port, debug=False)

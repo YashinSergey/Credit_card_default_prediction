@@ -13,12 +13,15 @@ data/raw/             # исходный датасет
 examples/             # примеры запросов к API
 models/               # сохраненная модель
 notebooks/            # обучение модели
+Dockerfile            # сборка Docker-образа
 requirements.txt      # зависимости
 ```
 
 ## Локальный запуск API
 
 ```bash
+python -m venv .venv
+source .venv/bin/activate
 pip install -r requirements.txt
 python app/api.py
 ```
@@ -26,6 +29,39 @@ python app/api.py
 Сервис запускается локально на `127.0.0.1:5001`.
 
 Важно: `/predict` вызывается POST-запросом. Если открыть адрес в браузере обычной строкой, браузер отправит GET-запрос, а это не предсказание.
+
+## Запуск в Docker
+
+Опубликованный Docker-образ:
+
+```text
+https://hub.docker.com/r/mrblue126/credit-card-default-api
+```
+
+Сборка образа:
+
+```bash
+docker build -t credit-card-default-api .
+```
+
+Запуск контейнера:
+
+```bash
+docker run --rm -p 5001:5001 credit-card-default-api
+```
+
+Проверка:
+
+```bash
+curl http://127.0.0.1:5001/health
+```
+
+Запуск опубликованного образа:
+
+```bash
+docker pull mrblue126/credit-card-default-api:latest
+docker run --rm -p 5001:5001 mrblue126/credit-card-default-api:latest
+```
 
 ## Эндпоинты
 
