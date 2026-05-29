@@ -1,4 +1,4 @@
-# Credit_card_default_prediction
+# Прогнозирование дефолта по кредитным картам
 
 Проект для прогнозирования дефолта по кредитным картам.  
 Датасет: `Default of Credit Card Clients Dataset`.
